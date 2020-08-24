@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  score: 1
+  start_at: 2020-08-24 15:12:36
+  end_at: 2020-08-24 15:12:36
+  work_time: 2020-08-24 15:12:36
+  done: false
+
+two:
+  score: 1
+  start_at: 2020-08-24 15:12:36
+  end_at: 2020-08-24 15:12:36
+  work_time: 2020-08-24 15:12:36
+  done: false
