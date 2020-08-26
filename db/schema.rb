@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2020_08_25_032020) do
     t.string "first_name"
     t.string "last_name"
     t.date "birth_date"
-    t.string "email"
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -51,9 +50,12 @@ ActiveRecord::Schema.define(version: 2020_08_25_032020) do
   end
 
   create_table "questions", force: :cascade do |t|
+    t.integer "right_answer"
+    t.integer "answer_id"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_questions_on_answer_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_08_25_032020) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "email"
     t.boolean "admin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
