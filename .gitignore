@@ -46,6 +46,3 @@ test/**
 #Ingnore lock file
 yarn.lock
 Gemfile.lock
-
-profiles.scss
-static_pages.scss
