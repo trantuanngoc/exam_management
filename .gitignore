@@ -42,7 +42,3 @@ yarn-debug.log*
 
 #Ignore test
 test/**
-
-#Ingnore lock file
-yarn.lock
-Gemfile.lock

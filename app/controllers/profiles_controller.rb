@@ -1,17 +1,12 @@
 class ProfilesController < ApplicationController
+  before_action :find_user_and_profile, only: [:show, :edit, :update]
   def show
-    @user = User.find_by(id: params[:user_id])
-    @profile = @user.profile
   end
 
   def edit
-    @user = User.find_by(id: params[:user_id])
-    @profile = @user.profile
   end
 
   def update
-    @user = User.find_by(id: params[:user_id])
-    @profile = User.find_by(id: params[:user_id]).profile
     if @profile.update(user_params)
       flash[:success] = "Profile updated"
       redirect_to user_profile_path
@@ -24,5 +19,10 @@ class ProfilesController < ApplicationController
 
   def user_params
     params.require(:profile).permit(:first_name, :last_name, :address, :email, :password, :password_confirmation)
+  end
+
+  def find_user_and_profile
+    @user = User.find_by(id: params[:user_id])
+    @profile = @user.profile
   end
 end
