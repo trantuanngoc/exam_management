@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :find_user_and_profile, only: [:show, :edit, :update]
+
   def show
   end
 
