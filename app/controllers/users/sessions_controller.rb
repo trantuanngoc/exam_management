@@ -1,10 +1,15 @@
 # frozen_string_literal: true
+module Users
+  class SessionsController < Devise::SessionsController
 
-class Users::SessionsController < Devise::SessionsController
-  def destroy
-    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-    set_flash_message! :notice, :signed_out if signed_out
-    yield if block_given?
-    redirect_to new_user_session_path
+    def after_sign_in_path_for(resource)
+      super
+      root_path
+    end
+
+    def after_sign_out_path_for(resource)
+      super
+      new_user_session_path
+    end
   end
 end
