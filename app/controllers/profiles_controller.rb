@@ -21,11 +21,7 @@ class ProfilesController < ApplicationController
   end
 
   def find_user_and_profile
-    unless current_user == User.find_by(id: params[:user_id])
-      redirect_to root_path
-    else
       @user = current_user
       @profile = @user.profile
-    end
   end
 end
