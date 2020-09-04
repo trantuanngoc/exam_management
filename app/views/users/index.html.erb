@@ -1,0 +1,15 @@
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= avatar_for user %>
+      <%= link_to user.email, user_profile_path(user) %>
+      <%= link_to "delete", user_registration_path(user), method: :delete, data: { confirm: "You sure?" } %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

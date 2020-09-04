@@ -9,10 +9,10 @@
           </figure>
         </div>
         <div class="col-xs-12 col-sm-8">
-          <p><strong><%= @profile.last_name.capitalize << @profile.first_name.capitalize%> </strong></p>
-          <p><strong>About: </strong> Web Designer / UI. </p>
-          <p><strong>Address: </strong> <%= @profile.address %> </p>
-          <%= link_to  "Edit profile", edit_user_profile_path(current_user) %>
+            <p><strong><%= (@profile.last_name||"").capitalize << (@profile.first_name||"").capitalize %> </strong></p>
+            <p><strong>About: </strong> Web Designer / UI. </p>
+            <p><strong>Address: </strong> <%= @profile.address %> </p>
+            <%= link_to  "Edit profile", edit_user_profile_path(@user) %>
         </div>
       </div>
     </div>
