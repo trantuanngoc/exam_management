@@ -1,0 +1,16 @@
+<h1>All subjects</h1>
+<%= link_to "Create subject", new_subject_path, class: "btn btn-primary" %>
+
+<%= will_paginate %>
+
+  <ul class="subjects">
+    <% @subjects.each do |subject| %>
+      <li>
+        <%= link_to subject.name, subject_path(subject), class: "list-group-item" %>
+        <%= link_to "Edit", edit_subject_path(subject) %>
+        <%= link_to "Delete", subject_path(subject), method: :delete, data: { confirm: "You sure?" } %>
+      </li>
+    <% end %>
+  </ul>
+
+<%= will_paginate %>
