@@ -21,7 +21,7 @@ class ProfilesController < ApplicationController
   end
 
   def find_user_and_profile
-    if current_user.admin?
+    if check_admin?
       @user = User.find_by(id: params[:user_id])
     else
       @user = current_user

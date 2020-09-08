@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :find_subject, only: [:show, :edit, :destroy, :update]
+  before_action :redirect_if_not_admin
   def index
     @subjects = Subject.paginate(page: params[:page])
   end
@@ -43,11 +44,11 @@ class SubjectsController < ApplicationController
     params.require(:subject).permit(:name)
   end
 
+  def redirect_if_not_admin
+    redirect_to root_path unless check_admin?
+  end
+
   def find_subject
-    if current_user.admin?
-      @subject = Subject.find_by(id: params[:id])
-    else
-      redirect_to root_path
-    end
+    @subject = Subject.find_by(id: params[:id])
   end
 end
