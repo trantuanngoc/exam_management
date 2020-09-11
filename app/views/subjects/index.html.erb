@@ -1,16 +1,33 @@
-<h1>All subjects</h1>
-<%= link_to "Create subject", new_subject_path, class: "btn btn-primary" %>
-
 <%= will_paginate %>
 
-  <ul class="subjects">
-    <% @subjects.each do |subject| %>
-      <li>
-        <%= link_to subject.name, subject_path(subject), class: "list-group-item" %>
-        <%= link_to "Edit", edit_subject_path(subject) %>
-        <%= link_to "Delete", subject_path(subject), method: :delete, data: { confirm: "You sure?" } %>
-      </li>
-    <% end %>
-  </ul>
+<div class="container-fluid">
+  <h1 class="mt-4">All subjects</h1>
+  <div class="card mb-4">
+    <%= link_to "Create subject", new_subject_path, class: "btn btn-primary fas fa-table mr-1" %>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Subject name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @subjects.each do |subject| %>
+            <tr>
+              <td><%= link_to subject.name, subject_path(subject) %></td>
+              <td><%= link_to "Edit", edit_subject_path(subject) %></td>
+              <td><%= link_to "Delete", subject_path(subject), method: :delete, data: { confirm: "You sure?" } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= will_paginate %>

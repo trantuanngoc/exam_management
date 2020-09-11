@@ -30,12 +30,14 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
   end
 
   create_table "exams", force: :cascade do |t|
+    t.integer "subject_id", null: false
     t.string "name"
     t.string "status"
     t.string "created_by"
     t.string "updated_by"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_id"], name: "index_exams_on_subject_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -94,5 +96,6 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "exams", "subjects"
   add_foreign_key "profiles", "users"
 end
