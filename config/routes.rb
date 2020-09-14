@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :new, :update, :index] do
     resource :profile
   end
+  resources :subjects
 end
