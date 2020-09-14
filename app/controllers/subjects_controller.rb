@@ -4,7 +4,12 @@ class SubjectsController < ApplicationController
 
   def index
     @subjects = Subject.paginate(page: params[:page])
-    @hints = Subject.order(:name).where("name like ?", "%#{params[:term]}%")
+
+    unless Subject.order(:name).where("name like ?", "%#{params[:term]}%").empty?
+      @hints = Subject.order(:name).where("name like ?", "%#{params[:term]}%")
+    else
+      @hints = Subject.order(:name)
+    end
     respond_to do |format|
       format.html
       format.json { render json: @hints.map(&:name) }

@@ -5,8 +5,7 @@ class ExamsController < ApplicationController
     @exams = Exam.paginate(page: params[:page])
   end
 
-  def new
-  end
+  def new; end
 
   def show; end
 

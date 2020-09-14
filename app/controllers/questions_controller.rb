@@ -7,18 +7,23 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @question.answers.build unless @question.answers.build.present?
   end
 
   def show; end
 
   def create
-    @subject = Subject.find_by(name: params[:question][:subject_name])
-    @question = @subject.questions.create(name: params[:question][:name], subject_id: params[:question][:subject_id], status: params[:question][:status])
+    @question = Question.new question_params
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     if @question.save
-      flash[:success] = "Create sucessful"
-      redirect_to questions_path
+      flash[:success] = "Created success!"
+      redirect_to root_path
     else
-      render :edit
+      flash[:error] = "Created failed!"
+      render :new
     end
   end
 
@@ -42,7 +47,13 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:name, :subject_name)
+    params.require(:question).permit(
+<<<<<<< Updated upstream
+      :content, :right_answer, answers_attributes: [:content]
+=======
+      :content, answers_attributes: [:content]
+>>>>>>> Stashed changes
+    )
   end
 
   def find_question

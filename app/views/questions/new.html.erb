@@ -1,14 +1,21 @@
-<h1>Question</h1>
+<h1 class="text-center mt-4">Question</h1>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_with(model: @question, local: true) do |f| %>
-      <%= render 'shared/error_messages', resource: f.object %>
+   <div class="col-md-6 mx-auto">
+    <%= form_for @question do |f| %>
 
-      <%= f.label :Content %>
-      <%= f.text_field :content, class: 'form-control' %>
+      <%= f.label :Question %>
+      <%= f.text_field :content , class: "form-control"%>
 
-      <%= f.submit class: "btn btn-primary" %>
+      <%= f.fields_for :answers do |answer| %>
+        <%= answer.label :Answer %>
+        <%= text_field_tag "question[answers_attributes][][content]","", class: "form-control mb-1" %>
+
+        <%= button_tag 'Add', type: 'button', class: "btn btn-primary mt-3", id: "add_answer" %>
+      <% end %>
+
+      <%= f.submit "Save", class: "btn btn-primary mt-3" %>
+      <div id="answer_div" class="mt-5"></div>
     <% end %>
 
   </div>

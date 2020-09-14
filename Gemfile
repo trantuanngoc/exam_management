@@ -4,7 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.5'
 
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
-gem 'bootstrap-sass', '3.4.1'
+gem 'bootstrap', '4.5.2'
+gem "chosen-rails"
 gem 'devise', '4.7.2'
 gem 'will_paginate',           '3.3.0'
 gem 'bootstrap-will_paginate', '1.0.0'
