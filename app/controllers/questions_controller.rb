@@ -14,10 +14,6 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new question_params
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     if @question.save
       flash[:success] = "Created success!"
       redirect_to root_path
@@ -48,11 +44,7 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(
-<<<<<<< Updated upstream
       :content, :right_answer, answers_attributes: [:content]
-=======
-      :content, answers_attributes: [:content]
->>>>>>> Stashed changes
     )
   end
 
