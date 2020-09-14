@@ -4,8 +4,4 @@ class Question < ApplicationRecord
   has_many :answers
 
   accepts_nested_attributes_for :answers
-<<<<<<< Updated upstream
-  accepts_nested_attributes_for :exam_questions
-=======
->>>>>>> Stashed changes
 end
