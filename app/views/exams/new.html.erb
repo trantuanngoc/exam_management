@@ -7,7 +7,7 @@
       <%= render "exams/subject_form", f: f %>
 
       <%= f.label :Exam %>
-      <%= f.text_field :name, class: "form-control"%>
+      <%= f.text_field :name, class: "form-control" %>
       <%= f.select :status, options_for_select([["Draft", "draft"], ["Public", "public"]]), {}, class: "selectpicker mt-3 mb-3" %>
 
       <%= render "exams/question_form", f: f %>

@@ -3,16 +3,6 @@ class SubjectsController < ApplicationController
   before_action :redirect_if_not_admin
   def index
     @subjects = Subject.paginate(page: params[:page])
-
-    unless Subject.order(:name).where("name like ?", "%#{params[:term]}%").empty?
-      @hints = Subject.order(:name).where("name like ?", "%#{params[:term]}%")
-    else
-      @hints = Subject.order(:name)
-    end
-    respond_to do |format|
-      format.html
-      format.json { render json: @hints.map(&:name) }
-    end
   end
 
   def new
