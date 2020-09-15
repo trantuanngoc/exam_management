@@ -1,17 +1,18 @@
-<h1>Exam</h1>
+<h1 class="text-center mt-4">Exam</h1>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_with(url: "/exams", scope: :exam, local: true) do |f| %>
+  <div class="col-md-6 mx-auto">
+    <%= form_for @exam do |f| %>
 
-      <%= render 'subjects/search_form', f: f%>
+      <%= render "exams/subject_form", f: f %>
 
-      <%= f.label :exam %>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.label :Exam %>
+      <%= f.text_field :name, class: "form-control"%>
+      <%= f.select :status, options_for_select([["Draft", "draft"], ["Public", "public"]]), {}, class: "selectpicker mt-3 mb-3" %>
 
-     <%= f.select :status, raw('<option value="draft">Draft</option><option value="public">Public</option>') %>
+      <%= render "exams/question_form", f: f %>
 
-      <%= f.submit "Create exam", class: "btn btn-primary" %>
+      <%= f.submit "Save", class: "btn btn-primary mt-3" %>
     <% end %>
   </div>
 </div>

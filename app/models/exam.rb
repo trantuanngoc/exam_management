@@ -4,6 +4,4 @@ class Exam < ApplicationRecord
   belongs_to :subject
   has_many :exam_questions
   has_many :questions, through: :exam_questions
-
-  accepts_nested_attributes_for :questions
 end

@@ -68,6 +68,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
+    bootstrap-select-rails (1.13.8)
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.4)
@@ -81,17 +82,6 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
-    chosen-rails (1.9.0)
-      coffee-rails (>= 3.2)
-      railties (>= 3.0)
-      sassc-rails (>= 2.1.2)
-    coffee-rails (5.0.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 5.2.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     devise (4.7.2)
@@ -236,10 +226,10 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap (= 4.5.2)
+  bootstrap-select-rails (>= 1.13.0)
   bootstrap-will_paginate (= 1.0.0)
   byebug
   capybara (>= 2.15)
-  chosen-rails
   devise (= 4.7.2)
   jbuilder (~> 2.7)
   listen (~> 3.2)
