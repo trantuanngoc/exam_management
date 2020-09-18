@@ -1,5 +1,5 @@
 class ExamsController < ApplicationController
-  before_action :find_exam, only: [:show, :edit, :destroy, :update]
+  before_action :find_exam, only: [:edit, :destroy, :update]
   before_action :redirect_if_not_admin
   before_action :list_subjects, only: %i(new edit)
   def index
@@ -10,8 +10,6 @@ class ExamsController < ApplicationController
     @exam = Exam.new
     @exam.questions.build.answers.build unless @exam.questions.build.answers.build.present?
   end
-
-  def show; end
 
   def create
     @exam = Exam.create(exam_params)
