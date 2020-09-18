@@ -2,6 +2,8 @@ class ExamsController < ApplicationController
   before_action :find_exam, only: [:edit, :destroy, :update]
   before_action :redirect_if_not_admin
   before_action :list_subjects, only: %i(new edit)
+  before_action :redirect_if_edit_public, only: :edit
+
   def index
     @exams = Exam.paginate(page: params[:page])
   end
@@ -49,6 +51,13 @@ class ExamsController < ApplicationController
 
   def list_subjects
     @subjects = Subject.all.select(:id, :name).map{|subject| [subject.name, subject.id]}
+  end
+
+  def redirect_if_edit_public
+    if @exam.status == 'public'
+      flash[:infor] = "Can't edit public exam"
+      redirect_to exams_path
+    end
   end
 
   def find_exam
