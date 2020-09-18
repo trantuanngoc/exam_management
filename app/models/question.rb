@@ -1,7 +1,6 @@
 class Question < ApplicationRecord
-  has_many :exam_questions
-  has_many :exams, through: :exam_questions
-  has_many :answers
+  belongs_to :exam
+  has_many :answers, dependent: :destroy
 
-  accepts_nested_attributes_for :answers
+  accepts_nested_attributes_for :answers, reject_if: :all_blank, allow_destroy: true
 end

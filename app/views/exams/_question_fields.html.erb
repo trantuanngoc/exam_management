@@ -1,0 +1,13 @@
+
+<div class="nested-fields card mb-4">
+  <div class="card-body">
+    <%= f.text_field :content, class: "form-control" %>
+    <div class="links mt-2">
+      <%= link_to_add_association '+', f, :answers, {data: {"association-insertion-method"=>"after"}, class: "btn btn-primary mb-2" } %>
+    </div>
+    <%= f.fields_for :answers do |answer| %>
+      <%= render "exams/answer_fields", f: answer %>
+    <% end %>
+    <%= link_to_remove_association "Remove question", f %>
+  </div>
+</div>

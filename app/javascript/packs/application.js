@@ -10,6 +10,8 @@ require("channels")
 require("jquery-ui")
 require("bootstrap-select")
 require("packs/custom")
+require("jquery")
+require("@nathanvda/cocoon")
 import "bootstrap"
 
 

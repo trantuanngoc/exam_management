@@ -82,6 +82,7 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
+    cocoon (1.2.15)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     devise (4.7.2)
@@ -230,6 +231,7 @@ DEPENDENCIES
   bootstrap-will_paginate (= 1.0.0)
   byebug
   capybara (>= 2.15)
+  cocoon (= 1.2.15)
   devise (= 4.7.2)
   jbuilder (~> 2.7)
   listen (~> 3.2)

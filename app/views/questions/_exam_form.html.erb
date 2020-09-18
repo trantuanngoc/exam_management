@@ -1,4 +1,0 @@
-<div class="form-group">
-  <%= f.label :exam_id %>
-  <%= f.select :exam_ids, options_for_select(@exams.map{|key, value| [key, value]}), {}, class: "selectpicker cusom-select", multiple: "true", data: {"live-search" => "true", width: "100%", size: 7}, title: "Type exam" %>
-</div>

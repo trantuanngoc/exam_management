@@ -15,18 +15,10 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
     t.text "content"
+    t.boolean "correct", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
-  end
-
-  create_table "exam_questions", force: :cascade do |t|
-    t.integer "question_id"
-    t.integer "exam_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["exam_id"], name: "index_exam_questions_on_exam_id"
-    t.index ["question_id"], name: "index_exam_questions_on_question_id"
   end
 
   create_table "exams", force: :cascade do |t|
@@ -53,10 +45,11 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "right_answer"
+    t.integer "exam_id", null: false
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_questions_on_exam_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -98,4 +91,5 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
 
   add_foreign_key "exams", "subjects"
   add_foreign_key "profiles", "users"
+  add_foreign_key "questions", "exams"
 end

@@ -1,7 +1,7 @@
 <h1 class="text-center mt-4">Exam</h1>
 
-<div class="row">
-  <div class="col-md-6 mx-auto">
+<div class="modal-body row">
+  <div class="col-md-4">
     <%= form_for @exam do |f| %>
 
       <%= render "exams/subject_form", f: f %>
@@ -9,10 +9,17 @@
       <%= f.label :Exam %>
       <%= f.text_field :name, class: "form-control" %>
       <%= f.select :status, options_for_select([["Draft", "draft"], ["Public", "public"]]), {}, class: "selectpicker mt-3 mb-3" %>
-
-      <%= render "exams/question_form", f: f %>
-
-      <%= f.submit "Save", class: "btn btn-primary mt-3" %>
-    <% end %>
+      <%= f.submit "Save", class: "btn btn-primary mt-3 align-right" %>
   </div>
+  <div class="col-md-8">
+
+      <div class="links">
+        <%= link_to_add_association 'Add', f, :questions, {data: {"association-insertion-method"=>"after"}, class: "btn btn-primary mb-2" } %>
+      </div>
+      <%= f.fields_for :questions do |question| %>
+        <%= render "question_fields", f: question%>
+      <% end %>
+
+  </div>
+    <% end %>
 </div>
