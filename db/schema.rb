@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
   create_table "exams", force: :cascade do |t|
     t.integer "subject_id", null: false
     t.string "name"
-    t.string "status"
+    t.string "status", default: "draft", null: false
     t.string "created_by"
     t.string "updated_by"
     t.datetime "created_at", precision: 6, null: false

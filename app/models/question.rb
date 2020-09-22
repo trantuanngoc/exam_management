@@ -7,7 +7,8 @@ class Question < ApplicationRecord
   validate :require_two_answers
 
   private
-    def require_two_answers
-      errors.add(:base, "You must provide at least two answers") if answers.size < 2
-    end
+
+  def require_two_answers
+    errors.add(:base, "You must provide at least two answers") if answers.size < 2
+  end
 end

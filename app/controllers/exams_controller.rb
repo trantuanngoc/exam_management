@@ -1,7 +1,7 @@
 class ExamsController < ApplicationController
   before_action :find_exam, only: [:edit, :destroy, :update]
   before_action :redirect_if_not_admin
-  before_action :list_subjects, only: %i(new edit)
+  before_action :list_subjects, only: %i(new edit create)
   before_action :redirect_if_edit_public, only: :edit
 
   def index
@@ -14,13 +14,12 @@ class ExamsController < ApplicationController
   end
 
   def create
-    @exam = Exam.create(exam_params)
+    @exam = Exam.new(exam_params)
     if @exam.save
-      flash[:success] = "Created success!"
-      redirect_to :edit
+      flash[:success] = "Create sucessful"
+      redirect_to exams_path
     else
-      @subjects = Subject.all.map{ |subject| [subject.name, subject.id] }
-      flash[:error] = "Created failed!"
+      flash[:info] = "Created failed!"
       render :new
     end
   end
@@ -30,7 +29,7 @@ class ExamsController < ApplicationController
   def update
     if @exam.update(exam_params)
       flash[:success] = "Exam updated"
-      redirect_to exam_path
+      redirect_to exams_path
     else
       render :edit
     end
@@ -46,22 +45,22 @@ class ExamsController < ApplicationController
 
   def exam_params
     params.require(:exam).permit(
-      :name, :subject_id, :status, questions_attributes: [:id, :content, answers_attributes: [:id, :content, :correct]]
+      :name, :subject_id, :status, questions_attributes: [:id, :content, :_destroy, answers_attributes: [:id, :content, :correct, :_destroy]]
     )
   end
 
   def list_subjects
-    @subjects = Subject.all.map{ |subject| [ subject.name, subject.id ] }
+    @subjects = Subject.all.map{ |subject| [subject.name, subject.id] }
   end
 
   def redirect_if_edit_public
-    if @exam.status == 'public'
-      flash[:infor] = "Can't edit public exam"
+    if @exam.public?
+      flash[:info] = "Can't edit public exam"
       redirect_to exams_path
     end
   end
 
   def find_exam
-    @exam = Exam.find_by(id: params[:id])
+    @exam = Exam.find(params[:id])
   end
 end

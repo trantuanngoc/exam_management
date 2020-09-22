@@ -9,6 +9,7 @@
         <tr>
           <th>Exam name</th>
           <th>Subject</th>
+          <th>Question</th>
           <th>Status</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -20,6 +21,7 @@
         <tr>
           <td><%= link_to exam.name, exam_path(exam) %></td>
           <td><%= exam.subject.name %></td>
+          <td><%= exam.questions.count %></td>
           <td><%= exam.status %></td>
           <td><%= link_to "Edit", edit_exam_path(exam) %></td>
           <td><%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "You sure?" } %></td>
