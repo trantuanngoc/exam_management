@@ -8,7 +8,7 @@
         </figure>
       </div>
       <div class="col-xs-12 col-sm-8">
-        <p><strong><%= (@profile.last_name||"").capitalize << (@profile.first_name||"").capitalize %> </strong></p>
+        <p><strong><%= @profile.full_name %> </strong></p>
         <p><strong>Birth day: </strong> <%= @profile.birth_date %> </p>
         <p><strong>Address: </strong> <%= @profile.address %> </p>
         <%= link_to  "Edit profile", edit_user_profile_path(@user) %>
