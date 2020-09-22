@@ -17,8 +17,9 @@ class ExamsController < ApplicationController
     @exam = Exam.create(exam_params)
     if @exam.save
       flash[:success] = "Created success!"
-      redirect_to exams_path
+      redirect_to :edit
     else
+      @subjects = Subject.all.map{ |subject| [subject.name, subject.id] }
       flash[:error] = "Created failed!"
       render :new
     end
@@ -45,12 +46,12 @@ class ExamsController < ApplicationController
 
   def exam_params
     params.require(:exam).permit(
-      :name, :subject_id, :status, questions_attributes: [:id, :content, :_destroy, answers_attributes: [:id, :content, :correct]]
+      :name, :subject_id, :status, questions_attributes: [:id, :content, answers_attributes: [:id, :content, :correct]]
     )
   end
 
   def list_subjects
-    @subjects = Subject.all.select(:id, :name).map{|subject| [subject.name, subject.id]}
+    @subjects = Subject.all.map{ |subject| [ subject.name, subject.id ] }
   end
 
   def redirect_if_edit_public

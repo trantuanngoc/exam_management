@@ -1,6 +1,7 @@
 
 <div class="nested-fields card mb-4">
   <div class="card-body">
+    <%= render "shared/error_messages", resource: f.object %>
     <%= f.text_field :content, class: "form-control" %>
     <div class="links mt-2">
       <%= link_to_add_association '+', f, :answers, {data: {"association-insertion-method"=>"after"}, class: "btn btn-primary mb-2" } %>
