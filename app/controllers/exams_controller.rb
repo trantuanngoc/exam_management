@@ -54,7 +54,7 @@ class ExamsController < ApplicationController
   end
 
   def redirect_if_edit_public
-    if @exam.public?
+    if @exam.exams_public?
       flash[:info] = "Can't edit public exam"
       redirect_to exams_path
     end

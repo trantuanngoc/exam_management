@@ -9,7 +9,7 @@ class Question < ApplicationRecord
   private
 
   def require_one_correct_answer
-    errors.add(:base, "You have to add 1 correct answer") unless answers.find_by(correct: true)
+    errors.add(:base, "You have to add 1 correct answer") unless answers.any? { |a| a[:correct] == true }
   end
 
   def require_two_answers

@@ -8,7 +8,7 @@
 
       <%= f.label :Exam %>
       <%= f.text_field :name, class: "form-control" %>
-      <%= f.select :status, options_for_select([["Draft", "draft"], ["Public", "public"]]), {}, class: "selectpicker mt-3 mb-3" %>
+      <%= f.select :status, options_for_select(Exam.statuses.keys.map {|status| [status.titleize, status]}), {}, class: "selectpicker mt-3 mb-3" %>
       <%= f.submit "Save", class: "btn btn-primary" %>
     </div>
     <div class="col-md-8 ml-5">
