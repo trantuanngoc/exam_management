@@ -1,0 +1,20 @@
+<h1 class="text-center mt-4">Exam</h1>
+
+
+<div class="col-md-3">
+  <% @exam.questions.each do |question| %>
+    <%= question.content %>
+
+      <%= form_for @user_exam do |f|%>
+        <% question.answers.each do |answer| %>
+          <input type="hidden" value="<%= @exam.id %>" name="user_exam[exam_id]">
+          <input type="hidden" value="<%= current_user.id %>" name="user_exam[user_id]">
+          <%= f.fields_for :take_answers do |take_answer| %>
+            <%= take_answer.text_field :answer_id %>
+          <% end %>
+        <% end %>
+        <%= f.submit "Save", class: "btn btn-primary" %>
+      <% end %>
+
+  <% end %>
+</div>
