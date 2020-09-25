@@ -4,23 +4,23 @@ function setCookie(name, value){
   var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000);
   document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
 }
-function getCookie(cname) {
+function getCookie(cname){
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
+  for(var i = 0; i <ca.length; i++){
     var c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) == ' '){
       c = c.substring(1);
     }
-    if (c.indexOf(name) == 0) {
+    if (c.indexOf(name) == 0){
       return c.substring(name.length, c.length);
     }
   }
   return "";
 }
 
-$( document ).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', function(){
 
   $('.selectpicker').selectpicker("refresh");
 
@@ -35,7 +35,7 @@ $( document ).on('turbolinks:load', function() {
     setCookie($(this).attr("name"), $(this).val());
   });
 
-  var x = setInterval(function() {
+  var x = setInterval(function(){
     var now = new Date().getTime();
     var distance = countDownTime - now;
 
@@ -57,17 +57,18 @@ $( document ).on('turbolinks:load', function() {
     }
   }, 1000);
 
-  $("#profile_image").bind("change", function() {
+  $("#profile_image").bind("change", function(){
     const size_in_megabytes = this.files[0].size/1024/1024;
-    if (size_in_megabytes > 5) {
+    if (size_in_megabytes > 5){
       alert("Maximum file size is 5MB. Please choose a smaller file.");
       $("#profile_image").val("");
     }
   });
 
-  $(".custom-file-input").on("change", function() {
+  $(".custom-file-input").on("change", function(){
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
+
 
 });
