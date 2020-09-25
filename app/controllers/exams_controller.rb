@@ -1,6 +1,6 @@
 class ExamsController < ApplicationController
   before_action :find_exam, only: [:edit, :destroy, :update]
-  before_action :redirect_if_not_admin
+  before_action :redirect_if_not_admin, only: [:edit, :destroy, :update, :new]
   before_action :list_subjects, only: %i(new edit create)
   before_action :redirect_if_edit_public, only: :edit
 

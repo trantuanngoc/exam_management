@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Exam name</th>
+        <th>Subject</th>
+        <th>Question number</th>
+        <th>Start</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @exams.each do |exam| %>
+      <tr>
+        <td><%= link_to exam.name, exam_path(exam) %></td>
+        <td><%= exam.subject.name %></td>
+        <td><%= exam.questions.count %></td>
+        <td><%= link_to "Start", new_user_exam_path(:exam_id => exam.id), class: "start" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

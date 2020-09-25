@@ -1,0 +1,30 @@
+<%= will_paginate %>
+
+<div class="container-fluid">
+  <h1 class="mt-4 mb-5 text-center">All Exams</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Exam name</th>
+          <th>Subject</th>
+          <th>User</th>
+          <th>Score (/100)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @user_exams.each do |user_exam| %>
+        <tr>
+          <td><%= user_exam.exam.name %></td>
+          <td><%= user_exam.exam.subject.name %></td>
+          <td><%= user_exam.user.email %></td>
+          <td><%= user_exam.score %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= will_paginate %>

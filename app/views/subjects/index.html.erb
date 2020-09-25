@@ -8,6 +8,7 @@
       <thead>
         <tr>
           <th>Subject name</th>
+          <th>Exam number</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -16,7 +17,8 @@
       <tbody>
         <% @subjects.each do |subject| %>
         <tr>
-          <td><%= link_to subject.name, subject_path(subject) %></td>
+          <td><%= subject.name %></td>
+          <td><%= subject.exams.count %></td>
           <td><%= link_to "Edit", edit_subject_path(subject) %></td>
           <td><%= link_to "Delete", subject_path(subject), method: :delete, data: { confirm: "You sure?" } %></td>
         </tr>

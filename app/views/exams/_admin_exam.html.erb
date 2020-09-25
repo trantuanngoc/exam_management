@@ -1,0 +1,28 @@
+<%= link_to "Create exam", new_exam_path, class: "btn btn-primary mb-4" %>
+<div class="table-responsive">
+  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Exam name</th>
+        <th>Subject</th>
+        <th>Question number</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @exams.each do |exam| %>
+      <tr>
+        <td><%= exam.name %></td>
+        <td><%= exam.subject.name %></td>
+        <td><%= exam.questions.count %></td>
+        <td><%= exam.status %></td>
+        <td><%= link_to "Edit", edit_exam_path(exam) %></td>
+        <td><%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "You sure?" } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

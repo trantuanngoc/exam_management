@@ -1,6 +1,4 @@
-<h1 class="text-center mt-4">Exam</h1>
-
-<%= form_for @exam, :html => {:class => 'container'} do |f|%>
+<%= form_for @exam, :html => {:class => 'container mt-5'} do |f|%>
   <div class="modal-body row">
     <div class="col-md-3">
       <%= render "shared/error_messages", resource: f.object %>
@@ -8,7 +6,7 @@
 
       <%= f.label :Exam %>
       <%= f.text_field :name, class: "form-control" %>
-      <%= f.select :status, options_for_select([["Draft", "draft"], ["Public", "public"]]), {}, class: "selectpicker mt-3 mb-3" %>
+      <%= f.select :status, options_for_select([["Draft", "draft"], ["Public", "public"]]), {}, class: "selectpicker form-control mt-3 mb-3" %>
       <%= f.submit "Save", class: "btn btn-primary" %>
     </div>
     <div class="col-md-8 ml-5">

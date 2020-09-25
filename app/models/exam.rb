@@ -1,6 +1,5 @@
 class Exam < ApplicationRecord
   validates :name, presence: true
-  enum status: [:draft, :public], _prefix: :exams
   has_many :user_exams
   has_many :users, through: :user_exams
   has_many :questions, dependent: :destroy
@@ -8,6 +7,10 @@ class Exam < ApplicationRecord
 
   accepts_nested_attributes_for :questions, reject_if: :all_blank, allow_destroy: true
   validate :require_one_question
+
+  def public?
+    self.status == "public"
+  end
 
   private
 

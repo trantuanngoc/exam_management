@@ -1,20 +1,36 @@
-<h1 class="text-center mt-4">Exam</h1>
+<h1 class="text-center mt-4"><%= @exam.name %></h1>
+<div id="clockdiv" class="col-md-12 mx-auto">
+  <div>
+    <span class="hours" id="hour"></span>
+  </div>
+  <div>
+    <span class="minutes" id="minute"></span>
+  </div>
+  <div>
+    <span class="seconds" id="second"></span>
+  </div>
+</div>
+<p id="demo"></p>
 
+<div class="col-md-4">
+  <%= form_for @user_exam do |f|%>
+    <input type="hidden" value="<%= @exam.id %>" name="user_exam[exam_id]">
+    <input type="hidden" value="<%= current_user.id %>" name="user_exam[user_id]">
+    <% @exam.questions.each_with_index do |question, index| %>
+      <h4>
+        <%= (index+1).to_s << ". " << question.content %>
+      </h4>
 
-<div class="col-md-3">
-  <% @exam.questions.each do |question| %>
-    <%= question.content %>
-
-      <%= form_for @user_exam do |f|%>
-        <% question.answers.each do |answer| %>
-          <input type="hidden" value="<%= @exam.id %>" name="user_exam[exam_id]">
-          <input type="hidden" value="<%= current_user.id %>" name="user_exam[user_id]">
-          <%= f.fields_for :take_answers do |take_answer| %>
-            <%= take_answer.text_field :answer_id %>
-          <% end %>
+      <% question.answers.each do |answer| %>
+        <%= f.fields_for :take_answers do |take_answer| %>
+        <div class="form-check">
+          <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id %>
+          <%= f.label answer.content %>
+        </div>
         <% end %>
-        <%= f.submit "Save", class: "btn btn-primary" %>
       <% end %>
 
+    <% end %>
+    <%= f.submit "Save", class: "btn btn-primary mt-3" %>
   <% end %>
 </div>

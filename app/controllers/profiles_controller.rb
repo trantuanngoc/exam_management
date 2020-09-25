@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   def edit; end
 
   def update
+    @profile.image.attach(params[:profile][:image])
     if @profile.update(user_params)
       flash[:success] = "Profile updated"
       redirect_to user_profile_path
@@ -17,7 +18,7 @@ class ProfilesController < ApplicationController
   private
 
   def user_params
-    params.require(:profile).permit(:first_name, :last_name, :address, :email, :password, :password_confirmation)
+    params.require(:profile).permit(:first_name, :last_name, :address, :email, :password, :password_confirmation, :image, :birth_date)
   end
 
   def find_user_and_profile

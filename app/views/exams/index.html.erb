@@ -2,34 +2,11 @@
 
 <div class="container-fluid">
   <h1 class="mt-4 mb-5 text-center">All Exams</h1>
-  <%= link_to "Create exam", new_exam_path, class: "btn btn-primary mb-4" %>
-  <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Exam name</th>
-          <th>Subject</th>
-          <th>Question</th>
-          <th>Status</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @exams.each do |exam| %>
-        <tr>
-          <td><%= link_to exam.name, exam_path(exam) %></td>
-          <td><%= exam.subject.name %></td>
-          <td><%= exam.questions.count %></td>
-          <td><%= exam.status %></td>
-          <td><%= link_to "Edit", edit_exam_path(exam) %></td>
-          <td><%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "You sure?" } %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <% if current_user.admin? %>
+    <%= render "admin_exam" %>
+  <% else %>
+    <%= render "user_exam" %>
+  <% end %>
 </div>
 
 <%= will_paginate %>
