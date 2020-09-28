@@ -1,22 +1,21 @@
 <h1 class="text-center mt-4">Exam</h1>
 
-<%= form_for @exam, :html => {:class => 'container'} do |f|%>
+<%= simple_form_for @exam, :html => {:class => 'container'} do |f|%>
   <div class="modal-body row">
     <div class="col-md-3">
-      <%= render "shared/error_messages", resource: f.object %>
-      <%= render "exams/subject_form", f: f %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <%= render "subject_form", f: f %>
 
-      <%= f.label :Exam %>
-      <%= f.text_field :name, class: "form-control" %>
-      <%= f.select :status, options_for_select(Exam.statuses.keys.map {|status| [status.titleize, status]}), {}, class: "selectpicker mt-3 mb-3" %>
-      <%= f.submit "Save", class: "btn btn-primary" %>
+      <%= f.input :name, label: "Exam", required: false %>
+      <%= f.input :status, as: :select, collection: Exam.statuses.keys.map {|status| [status.titleize, status]}, class: "selectpicker" %>
+      <%= f.button :submit, class: "btn btn-primary" %>
     </div>
     <div class="col-md-8 ml-5">
       <div class="links">
         <%= link_to_add_association 'Add', f, :questions, {data: {"association-insertion-method"=>"after"}, class: "btn btn-primary mb-2" } %>
       </div>
       <%= f.fields_for :questions do |question| %>
-        <%= render "exams/question_fields", f: question%>
+        <%= render "question_fields", f: question%>
       <% end %>
     </div>
   </div>
