@@ -15,7 +15,7 @@
         <td><%= link_to exam.name, exam_path(exam) %></td>
         <td><%= exam.subject.name %></td>
         <td><%= exam.questions.count %></td>
-        <td><%= link_to "Start", new_user_exam_path(:exam_id => exam.id), class: "start" %></td>
+        <td><%= link_to "Start", new_user_exam_path(:exam_id => exam.id), class: "start btn btn-primary" %></td>
       </tr>
       <% end %>
     </tbody>

@@ -1,4 +1,1 @@
-<div class="form-group">
-  <%= f.label :subject_id %>
-  <%= select_tag "exam[subject_id]", options_for_select(@subjects, selected: @exam.subject_id), class: "selectpicker", multiple: "true", data: {"live-search" => "true", width: "100%", size: 7, "max-options" => 1}, title: "Type subject" %>
-</div>
+<%= f.input :subject_id, as: :select , collection: @subjects, selected: @exam.subject_id, class: "selectpicker", multiple: "true", data: {"live-search" => "true", width: "100%", size: 7, "max-options" => 1}, title: "Type subject" %>

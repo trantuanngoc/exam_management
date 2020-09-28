@@ -7,7 +7,7 @@ size:         { less_than: 5.megabytes,
     message:   "should be less than 5MB" }
 
   def full_name
-    (self.last_name || "").capitalize << " " << (self.first_name || "").capitalize
+    (last_name || "").capitalize << " " << (first_name || "").capitalize
   end
 
   def display_image
