@@ -20,6 +20,14 @@ function getCookie(cname){
   return "";
 }
 
+$(".new_user_exam").load(function(){
+  debugger;
+  $(".form-check radio").each(function(){
+    if($(this).val() == getCookie($(this).attr("name")))
+      $(this).checked = true;
+  });
+});
+
 $(document).on('turbolinks:load', function(){
 
   $('.selectpicker').selectpicker("refresh");
@@ -69,6 +77,8 @@ $(document).on('turbolinks:load', function(){
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
+
+
 
 
 });
