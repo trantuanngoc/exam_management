@@ -20,8 +20,7 @@ function getCookie(cname){
   return "";
 }
 
-$(".new_user_exam").load(function(){
-  debugger;
+$("#new_user_exam").ready(function(){
   $(".form-check radio").each(function(){
     if($(this).val() == getCookie($(this).attr("name")))
       $(this).checked = true;
@@ -29,7 +28,6 @@ $(".new_user_exam").load(function(){
 });
 
 $(document).on('turbolinks:load', function(){
-
   $('.selectpicker').selectpicker("refresh");
 
   $(".start").click(function(){
@@ -62,6 +60,7 @@ $(document).on('turbolinks:load', function(){
       $(".hours").html(0);
       $(".minutes").html(0);
       $(".seconds").html(0);
+      $("#new_user_exam").submit();
     }
   }, 1000);
 
