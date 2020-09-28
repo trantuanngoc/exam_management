@@ -20,10 +20,10 @@ function getCookie(cname){
   return "";
 }
 
-$("#new_user_exam").ready(function(){
+$("#new_user_exam").load(function(){
   $(".form-check radio").each(function(){
     if($(this).val() == getCookie($(this).attr("name")))
-      $(this).checked = true;
+      $(this).prop('checked', true);
   });
 });
 
