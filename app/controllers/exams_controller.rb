@@ -15,7 +15,6 @@ class ExamsController < ApplicationController
 
   def create
     @exam = Exam.new(exam_params)
-    @exam.errors.full_messages
     if @exam.save
       flash[:success] = "Create sucessful"
       redirect_to exams_path
