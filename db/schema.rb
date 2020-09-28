@@ -15,27 +15,21 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
   create_table "answers", force: :cascade do |t|
     t.integer "question_id"
     t.text "content"
+    t.boolean "correct", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
-  create_table "exam_questions", force: :cascade do |t|
-    t.integer "question_id"
-    t.integer "exam_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["exam_id"], name: "index_exam_questions_on_exam_id"
-    t.index ["question_id"], name: "index_exam_questions_on_question_id"
-  end
-
   create_table "exams", force: :cascade do |t|
+    t.integer "subject_id", null: false
     t.string "name"
-    t.string "status"
+    t.integer "status", default: 0, null: false
     t.string "created_by"
     t.string "updated_by"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_id"], name: "index_exams_on_subject_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -51,10 +45,11 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "right_answer"
+    t.integer "exam_id", null: false
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_questions_on_exam_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -94,5 +89,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_085734) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "exams", "subjects"
   add_foreign_key "profiles", "users"
+  add_foreign_key "questions", "exams"
 end

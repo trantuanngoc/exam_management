@@ -1,16 +1,50 @@
-<h1>All users</h1>
-<%= link_to "Create user", new_user_path %>
-
 <%= will_paginate %>
+<div class="container">
 
-<ul class="users">
+  <h1 class="my-4 text-center">All users</h1>
+
+  <%= link_to "Create user", new_user_path, class: "btn btn-primary mb-4" %>
+
   <% @users.each do |user| %>
-    <li>
-      <%= avatar_for user %>
-      <%= link_to user.email, user_profile_path(user) %>
-      <%= link_to "delete", user_registration_path(user), method: :delete, data: { confirm: "You sure?" } %>
-    </li>
+  <div class="row">
+    <div class="col-md-6">
+      <a href="#">
+        <%= avatar_for(user,100,100) %>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <h5><%= link_to user.email, user_profile_path(user) %></h5>
+      <%= link_to "delete", user_registration_path(user), class: "btn btn-primary", method: :delete, data: { confirm: "You sure?" } %>
+    </div>
+  </div>
+  <hr>
   <% end %>
-</ul>
+
+  <!-- Pagination -->
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+
+</div>
 
 <%= will_paginate %>

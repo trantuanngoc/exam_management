@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     resource :profile
   end
   resources :subjects
+  resources :exams
+  resources :questions
 end
