@@ -12,6 +12,6 @@ class Exam < ApplicationRecord
   private
 
   def require_one_question
-    errors.add(:base, "You must provide at least one questions") if questions.size < 1
+    errors.add(:base, "You must provide at least one questions") if questions.reject(&:marked_for_destruction?).size < 1
   end
 end
