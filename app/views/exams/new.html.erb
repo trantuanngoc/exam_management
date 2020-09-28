@@ -5,7 +5,6 @@
     <div class="col-md-3">
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
       <%= render "subject_form", f: f %>
-
       <%= f.input :name, label: "Exam", required: false %>
       <%= f.input :status, as: :select, collection: Exam.statuses.keys.map {|status| [status.titleize, status]}, class: "selectpicker" %>
       <%= f.button :submit, class: "btn btn-primary" %>
