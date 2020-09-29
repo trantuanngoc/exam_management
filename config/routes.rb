@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
   root 'static_pages#home'
   devise_scope :user do
     get 'signin' => 'users/sessions#new'
@@ -12,4 +13,5 @@ Rails.application.routes.draw do
   resources :subjects
   resources :exams
   resources :user_exams
+  mount Sidekiq::Web, at: '/sidekiq'
 end
