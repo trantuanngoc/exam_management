@@ -1,11 +1,11 @@
 class UserExamWorker
   include Sidekiq::Worker
+  sidekiq_options retry: false
 
   def perform user_exam_id
-    user_exam = UserExam.find_by_id user_exam_id
-    return unless user_exam
+    @user_exam = UserExam.find_by(id: user_exam_id)
     destroy_jobs user_exam_id
-    user_exam.update_attributes(score: 0) unless user_exam.score
+    @user_exam.update_attributes(score: 0) unless @user_exam.score
   end
 
   def destroy_jobs user_exam_id
