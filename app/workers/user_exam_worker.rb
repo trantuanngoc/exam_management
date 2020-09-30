@@ -5,7 +5,9 @@ class UserExamWorker
   def perform user_exam_id
     @user_exam = UserExam.find_by(id: user_exam_id)
     destroy_jobs user_exam_id
-    @user_exam.update_attributes(score: 0) unless @user_exam.score
+    unless @user_exam.done?
+      @user_exam.update_attributes(score: 0, done: true)
+    end
   end
 
   def destroy_jobs user_exam_id

@@ -14,8 +14,6 @@
 
 <div class="col-md-4">
   <%= form_for @user_exam do |f|%>
-    <input type="hidden" value="<%= @exam.id %>" name="user_exam[exam_id]">
-    <input type="hidden" value="<%= current_user.id %>" name="user_exam[user_id]">
     <% @exam.questions.each_with_index do |question, index| %>
       <h4>
         <%= (index+1).to_s << ". " << question.content %>

@@ -7,7 +7,7 @@ class CreateUserExams < ActiveRecord::Migration[6.0]
       t.datetime :start_at
       t.datetime :end_at
       t.time :work_time
-      t.boolean :done
+      t.boolean :done, default: false
 
       t.timestamps
     end

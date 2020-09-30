@@ -6,9 +6,9 @@ class UserExamsController < ApplicationController
 
   def new
     @exam = Exam.find_by(id: params[:exam_id])
-    @user_exam = UserExam.create(exam_id: @exam.id, user_id: current_user.id)
+    @user_exam = UserExam.find_or_create_by(exam_id: @exam.id, user_id: current_user.id, done: false)
     @user_exam.take_answers.build
-    UserExamWorker.perform_at(Time.zone.now + 30.minutes, @user_exam.id)
+    UserExamWorker.perform_at(Time.zone.now + 5.seconds, @user_exam.id)
   end
 
   def update
@@ -24,9 +24,10 @@ class UserExamsController < ApplicationController
   private
 
   def user_exam_params
-    params.require(:user_exam).permit(
-      take_answers_attributes: [:id, :answer_id, :_destroy]
-    )
+    params
+      .require(:user_exam)
+      .permit(:done , take_answers_attributes: [:id, :answer_id, :_destroy])
+      .with_defaults(done: true)
   end
 
   def get_done_exam
@@ -39,7 +40,9 @@ class UserExamsController < ApplicationController
 
   def redirect_if_time_out
     @user_exam = UserExam.find_by(id: params[:id])
-    flash[:danger] = "Time out"
-    redirect_to user_exams_path if @user_exam.score
+    if @user_exam.done?
+      flash[:danger] = "Time out"
+      redirect_to user_exams_path
+    end
   end
 end

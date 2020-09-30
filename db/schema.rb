@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2020_09_24_234007) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.time "work_time"
-    t.boolean "done"
+    t.boolean "done", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exam_id"], name: "index_user_exams_on_exam_id"
