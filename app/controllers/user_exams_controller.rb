@@ -42,16 +42,6 @@ class UserExamsController < ApplicationController
       .with_defaults(done: true)
   end
 
-  def update_params
-    params.permit(take_answers_attributes: [:id, :answer_id, :question_id, :_destroy])
-  end
-
-  def abc_params
-    params
-      .require(:user_exam)
-      .permit(take_answers_attributes: [:answer_id])
-  end
-
   def get_done_exam
     if current_user.admin?
       @user_exams = UserExam.paginate(page: params[:page])
