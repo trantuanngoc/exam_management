@@ -1,44 +1,23 @@
 var countDownTime;
-function setCookie(name, value){
-  var today = new Date();
-  var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000);
-  document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
-}
-function getCookie(cname){
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++){
-    var c = ca[i];
-    while (c.charAt(0) == ' '){
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0){
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-$("#new_user_exam").load(function(){
-  $(".form-check radio").each(function(){
-    if($(this).val() == getCookie($(this).attr("name")))
-      $(this).prop('checked', true);
-  });
-});
-
 $(document).on('turbolinks:load', function(){
   $('.selectpicker').selectpicker("refresh");
+  countDownTime = new Date($(".temp_information").data("temp"));
 
-  $(".start").click(function(){
-    var d = new Date();
-    d.setMinutes(d.getMinutes() + 30);
-    countDownTime = d.getTime();
-    setCookie("countDownTime", countDownTime);
-  });
+  $(".edit_user_exam").find("input").change(function(){
+    var answer_id = $(this).val() ;
+    var question_id = $(this).siblings("input").val();
+    var user_exam_id = $(".temp_information").data("id");
 
-  $(".new_user_exam input").change(function(){
-    setCookie($(this).attr("name"), $(this).val());
+    $.ajax({
+      url: '/user_exams/save',
+      type: 'POST',
+      data: {
+        answer_id,
+        question_id,
+        user_exam_id
+      }
+    }).done(function(){
+    });
   });
 
   var x = setInterval(function(){
@@ -60,7 +39,7 @@ $(document).on('turbolinks:load', function(){
       $(".hours").html(0);
       $(".minutes").html(0);
       $(".seconds").html(0);
-      $("#new_user_exam").submit();
+      $(".edit_user_exam").submit();
     }
   }, 1000);
 
@@ -76,8 +55,5 @@ $(document).on('turbolinks:load', function(){
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
-
-
-
 
 });

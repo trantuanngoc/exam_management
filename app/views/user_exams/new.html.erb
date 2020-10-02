@@ -1,3 +1,6 @@
+<%= content_tag :div, class: "temp_information", data: {temp: @time, id: @user_exam.id} do %>
+<% end %>
+
 <h1 class="text-center mt-4"><%= @exam.name %></h1>
 <div id="clockdiv" class="col-md-12 mx-auto">
   <div>
@@ -20,12 +23,15 @@
       </h4>
 
       <% question.answers.each do |answer| %>
-        <%= f.fields_for :take_answers do |take_answer| %>
         <div class="form-check">
-          <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id %>
-          <%= f.label answer.content %>
+          <% if check_if_chosen(@user_exam, answer) %>
+            <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id, checked: "checked" %>
+          <% else %>
+            <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id %>
+          <% end %>
+          <%= hidden_field_tag "user_exam[take_answers_attributes][#{question.id}][question_id]", question.id %>
+          <label for=answer.id><%= answer.content %></label><br>
         </div>
-        <% end %>
       <% end %>
 
     <% end %>

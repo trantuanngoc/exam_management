@@ -5,6 +5,8 @@
         <h3>Profile</h3>
         <% if @profile.image.attached? %>
         <%= image_tag @profile.display_image , class: "img-circle" %>
+        <% else %>
+          <%= avatar_for(@profile, 150, 150) %>
         <% end %>
       </figure>
       <p><strong><%= @profile.full_name %> </strong></p>

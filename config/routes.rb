@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :new, :update, :index] do
     resource :profile
   end
+  post "/user_exams/save", to: "user_exams#save"
   resources :subjects
   resources :exams
   resources :user_exams

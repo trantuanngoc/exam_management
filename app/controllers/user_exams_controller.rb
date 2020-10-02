@@ -6,9 +6,21 @@ class UserExamsController < ApplicationController
 
   def new
     @exam = Exam.find_by(id: params[:exam_id])
-    @user_exam = UserExam.find_or_create_by(exam_id: @exam.id, user_id: current_user.id, done: false)
+    @user_exam = UserExam.find_or_initialize_by(exam_id: @exam.id, user_id: current_user.id, done: false )
+    if @user_exam.new_record?
+      @user_exam.update(start_at: Time.zone.now, end_at: Time.zone.now + 30.minutes)
+    else
+      @time = @user_exam.end_at.to_f * 1000
+    end
     @user_exam.take_answers.build
-    UserExamWorker.perform_at(Time.zone.now + 5.seconds, @user_exam.id)
+    UserExamWorker.perform_at(Time.zone.now + 30.minutes, @user_exam.id)
+  end
+
+  def save
+    @user_exam = UserExam.find_by(id: params[:user_exam_id])
+    @question = Answer.find_by(id: params[:answer_id]).question
+    TakeAnswer.where(question_id: @question.id, user_exam_id: @user_exam.id).delete_all
+    TakeAnswer.create(user_exam_id: @user_exam.id, answer_id: params[:answer_id])
   end
 
   def update
@@ -26,8 +38,18 @@ class UserExamsController < ApplicationController
   def user_exam_params
     params
       .require(:user_exam)
-      .permit(:done , take_answers_attributes: [:id, :answer_id, :_destroy])
+      .permit(:done, take_answers_attributes: [:id, :answer_id, :question_id, :_destroy])
       .with_defaults(done: true)
+  end
+
+  def update_params
+    params.permit(take_answers_attributes: [:id, :answer_id, :question_id, :_destroy])
+  end
+
+  def abc_params
+    params
+      .require(:user_exam)
+      .permit(take_answers_attributes: [:answer_id])
   end
 
   def get_done_exam
