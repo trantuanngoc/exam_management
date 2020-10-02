@@ -28,7 +28,6 @@ $(document).on('turbolinks:load', function(){
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-
     $("#hour").html(hours);
     $("#minute").html(minutes);
     $("#second").html(seconds);
@@ -55,5 +54,4 @@ $(document).on('turbolinks:load', function(){
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
-
 });
