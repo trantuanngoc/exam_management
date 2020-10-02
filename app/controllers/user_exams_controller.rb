@@ -20,7 +20,7 @@ class UserExamsController < ApplicationController
     @user_exam = UserExam.find_by(id: params[:user_exam_id])
     @question = Answer.find_by(id: params[:answer_id]).question
     TakeAnswer.where(question_id: @question.id, user_exam_id: @user_exam.id).delete_all
-    TakeAnswer.create(user_exam_id: @user_exam.id, answer_id: params[:answer_id])
+    TakeAnswer.create(user_exam_id: @user_exam.id, answer_id: params[:answer_id], question_id: @question.id)
   end
 
   def update
