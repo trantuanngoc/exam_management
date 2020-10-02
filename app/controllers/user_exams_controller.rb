@@ -52,7 +52,7 @@ class UserExamsController < ApplicationController
 
   def redirect_if_time_out
     @user_exam = UserExam.find_by(id: params[:id])
-    if @user_exam.done?
+    if Time.zone.now > @user_exam.end_at
       flash[:danger] = "Time out"
       redirect_to user_exams_path
     end
