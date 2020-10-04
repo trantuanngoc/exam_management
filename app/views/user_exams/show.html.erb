@@ -1,0 +1,20 @@
+<h1 class="text-center mt-4"><%= @user_exam.exam.name %></h1>
+<div class="col-md-4">
+  <% @user_exam.exam.questions.each_with_index do |question, index| %>
+    <h4><%= (index+1).to_s << ". " << question.content %></h4>
+    <% question.answers.each do |answer| %>
+      <div class="form-check">
+        <% if check_if_chosen?(@user_exam, answer) %>
+          <%= radio_button "","", answer.id, checked: true, disabled: true %>
+        <% else %>
+          <%= radio_button "","", answer.id, disabled: true %>
+        <% end %>
+        <% if answer.correct? %>
+          <label class="text-success" for=answer.id><%= answer.content %></label><br>
+        <% else %>
+          <label for=answer.id><%= answer.content %></label><br>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

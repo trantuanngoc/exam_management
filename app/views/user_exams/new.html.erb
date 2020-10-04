@@ -24,7 +24,7 @@
 
       <% question.answers.each do |answer| %>
         <div class="form-check">
-          <% if check_if_chosen(@user_exam, answer) %>
+          <% if check_if_chosen?(@user_exam, answer) %>
             <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id, checked: "checked" %>
           <% else %>
             <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id %>

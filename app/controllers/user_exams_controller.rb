@@ -1,12 +1,15 @@
 class UserExamsController < ApplicationController
   before_action :get_done_exam, only: [:index]
   before_action :redirect_if_time_out, only: [:update]
+  before_action :redirect_if_not_done, only: [:show]
 
   def index; end
 
+  def show; end
+
   def new
     @exam = Exam.find_by(id: params[:exam_id])
-    @user_exam = UserExam.find_or_initialize_by(exam_id: @exam.id, user_id: current_user.id, done: false )
+    @user_exam = UserExam.find_or_initialize_by(exam_id: @exam.id, user_id: current_user.id, done: false)
     if @user_exam.new_record?
       @user_exam.update(start_at: Time.zone.now, end_at: Time.zone.now + 30.minutes)
     else
@@ -38,15 +41,15 @@ class UserExamsController < ApplicationController
   def user_exam_params
     params
       .require(:user_exam)
-      .permit(:done, take_answers_attributes: [:id, :answer_id, :question_id, :_destroy])
+      .permit(:done)
       .with_defaults(done: true)
   end
 
   def get_done_exam
     if current_user.admin?
-      @user_exams = UserExam.paginate(page: params[:page])
+      @user_exams = UserExam.order(:score).paginate(page: params[:page])
     else
-      @user_exams = UserExam.where(user_id: current_user.id).paginate(page: params[:page])
+      @user_exams = UserExam.where(user_id: current_user.id).order(:score).paginate(page: params[:page])
     end
   end
 
@@ -56,5 +59,10 @@ class UserExamsController < ApplicationController
       flash[:danger] = "Time out"
       redirect_to user_exams_path
     end
+  end
+
+  def redirect_if_not_done
+    @user_exam = UserExam.find_by(id: params[:id])
+    redirect_to user_exams_path unless @user_exam.done?
   end
 end

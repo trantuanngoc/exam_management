@@ -1,0 +1,25 @@
+<thead>
+  <tr>
+    <th>Exam name</th>
+    <th>Subject</th>
+    <th>User</th>
+    <th>Score (/100)</th>
+    <th>Start at</th>
+    <th>Finish at</th>
+    <th>Review</th>
+  </tr>
+</thead>
+
+<tbody>
+  <% @user_exams.each do |user_exam| %>
+    <tr>
+      <td><%= user_exam.exam.name %></td>
+      <td><%= user_exam.exam.subject.name %></td>
+      <td><%= user_exam.user.email %></td>
+      <td><%= user_exam.score %></td>
+      <td><%= user_exam.start_at %></td>
+      <td><%= user_exam.end_at %></td>
+      <td><%= link_to "Review", user_exam_path(user_exam) %></td>
+    </tr>
+  <% end %>
+</tbody>

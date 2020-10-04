@@ -32,7 +32,7 @@ $(document).on('turbolinks:load', function(){
     $("#minute").html(minutes);
     $("#second").html(seconds);
 
-    if (distance < 0) {
+    if (distance < 0){
       clearInterval(x);
       $("#demo").html("TIME UP");
       $(".hours").html(0);
