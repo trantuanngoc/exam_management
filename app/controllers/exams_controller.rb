@@ -6,7 +6,7 @@ class ExamsController < ApplicationController
 
   def index
     @search = Exam.search(params[:q])
-    @exams = @search.result
+    @exams = Exam.ransack(status_eq: params[:q][:status_cont]).result
   end
 
   def new
