@@ -1,4 +1,12 @@
-<%= link_to "Create exam", new_exam_path, class: "btn btn-primary mb-4" %>
+<div class="row mb-5">
+  <%= link_to "Create user", new_exam_path, class: "btn btn-primary ml-3" %>
+  <%= search_form_for @search, html: {class: "form-inline ml-auto mr-3"} do |f| %>
+    <div class="field form-group">
+      <%= f.select :status_cont, options_for_select(Exam.statuses.keys.map {|status| [status.titleize, status]}), {}, class: "form-control mx-sm-3" %>
+    </div>
+    <div class="actions"><%= f.submit "Search", class: "btn btn-primary" %></div>
+  <% end %>
+</div>
 <div class="table-responsive">
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
@@ -19,8 +27,8 @@
         <td><%= exam.subject.name %></td>
         <td><%= exam.questions.count %></td>
         <td><%= exam.status %></td>
-        <td><%= link_to "Edit", edit_exam_path(exam) %></td>
-        <td><%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "You sure?" } %></td>
+        <td><%= link_to "Edit", edit_exam_path(exam), class: "btn btn-primary" %></td>
+        <td><%= link_to "Delete", exam_path(exam), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></td>
       </tr>
       <% end %>
     </tbody>

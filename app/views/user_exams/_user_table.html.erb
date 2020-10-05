@@ -17,7 +17,7 @@
       <td><%= user_exam.score %></td>
       <td><%= user_exam.start_at %></td>
       <td><%= user_exam.end_at %></td>
-      <td><%= link_to "Review", user_exam_path(user_exam) %></td>
+      <td><%= link_to "Review", user_exam_path(user_exam), class: "btn btn-primary" %></td>
     </tr>
   <% end %>
 </tbody>

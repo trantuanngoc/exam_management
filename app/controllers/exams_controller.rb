@@ -5,7 +5,8 @@ class ExamsController < ApplicationController
   before_action :redirect_if_edit_public, only: :edit
 
   def index
-    @exams = Exam.paginate(page: params[:page])
+    @search = Exam.search(params[:q])
+    @exams = @search.result
   end
 
   def new
