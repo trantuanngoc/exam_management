@@ -11,11 +11,13 @@ class UserExamsController < ApplicationController
     @exam = Exam.find_by(id: params[:exam_id])
     @user_exam = UserExam.find_or_initialize_by(exam_id: @exam.id, user_id: current_user.id, done: false)
     if @user_exam.new_record?
+      @exam.questions.each do |e|
+        @user_exam.take_answers.build
+      end
       @user_exam.update(start_at: Time.zone.now, end_at: Time.zone.now + 30.minutes)
     else
       @time = @user_exam.end_at.to_f * 1000
     end
-    @user_exam.take_answers.build
     UserExamWorker.perform_at(Time.zone.now + 30.minutes, @user_exam.id)
   end
 

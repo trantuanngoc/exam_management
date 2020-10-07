@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function(){
   $('.selectpicker').selectpicker("refresh");
   countDownTime = new Date($(".temp_information").data("temp"));
 
-  $(".edit_user_exam").find("input").change(function(){
+  $(".edit_user_exam").find(":radio").change(function(){
     var answer_id = $(this).val() ;
     var question_id = $(this).siblings("input").val();
     var user_exam_id = $(".temp_information").data("id");

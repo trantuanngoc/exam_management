@@ -5,8 +5,9 @@ class ExamsController < ApplicationController
   before_action :redirect_if_edit_public, only: :edit
 
   def index
-    @search = Exam.search(params[:q])
-    @exams = Exam.ransack(status_eq: params[:q][:status_cont]).result
+    @search = Exam.ransack(params[:q])
+    @exams = @search.result(distinct: true)
+
   end
 
   def new

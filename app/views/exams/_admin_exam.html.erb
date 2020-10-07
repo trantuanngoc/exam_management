@@ -2,7 +2,7 @@
   <%= link_to "Create user", new_exam_path, class: "btn btn-primary ml-3" %>
   <%= search_form_for @search, html: {class: "form-inline ml-auto mr-3"} do |f| %>
     <div class="field form-group">
-      <%= f.select :status_cont, options_for_select(Exam.statuses.keys.map {|status| [status.titleize, status]}), {}, class: "form-control mx-sm-3" %>
+      <%= f.select :status_eq, Exam.statuses.to_a.map {|w| [w[0].humanize, w[1]]}, {}, class: "form-control mx-sm-3" %>
     </div>
     <div class="actions"><%= f.submit "Search", class: "btn btn-primary" %></div>
   <% end %>

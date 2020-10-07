@@ -9,10 +9,6 @@ class Exam < ApplicationRecord
   accepts_nested_attributes_for :questions, allow_destroy: true
   validate :require_one_question
 
-  ransacker :status, formatter: proc {|v| statuses[v]} do |parent|
-    parent.table[:status]
-  end
-
   private
 
   def require_one_question

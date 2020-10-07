@@ -17,24 +17,24 @@
 
 <div class="col-md-4">
   <%= form_for @user_exam do |f|%>
-    <% @exam.questions.each_with_index do |question, index| %>
-      <h4>
-        <%= (index+1).to_s << ". " << question.content %>
-      </h4>
 
-      <% question.answers.each do |answer| %>
-        <div class="form-check">
-          <% if check_if_chosen?(@user_exam, answer) %>
-            <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id, checked: "checked" %>
-          <% else %>
-            <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id %>
-          <% end %>
+
+
+  <%= f.fields_for :take_answers do |take_answer| %>
+    <% @exam.question.answers.each do |answer| %>
+      <div class="form-check">
+        <% if check_if_chosen?(@user_exam, answer) %>
+          <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id, checked: "checked" %>
+        <% else %>
+          <%= radio_button_tag "user_exam[take_answers_attributes][#{question.id}][answer_id]", answer.id %>
+        <% end %>
           <%= hidden_field_tag "user_exam[take_answers_attributes][#{question.id}][question_id]", question.id %>
-          <label for=answer.id><%= answer.content %></label><br>
-        </div>
-      <% end %>
-
+        <label for=answer.id><%= answer.content %></label><br>
+      </div>
     <% end %>
-    <%= f.submit "Save", class: "btn btn-primary mt-3" %>
+  <% end %>
+
+
+  <%= f.submit "Save", class: "btn btn-primary mt-3" %>
   <% end %>
 </div>
